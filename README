@@ -1,0 +1,4 @@
+PDL::Slatec is an extension to PDL to allow using routines
+from the Slatec matrix library. This is totally alpha and is intended just 
+as a proof of principle. This connects to the singular-value decomposition
+routine in slatec.

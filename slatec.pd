@@ -1,0 +1,32 @@
+# NOTE!
+#
+# Do not use index remapping with these functions when it 
+# comes available: your nose will bleed.
+
+# For my private use, remove if it bothers you
+use blib "../pp";
+use PDL::PP qw/PDL::Slatec PDL::Slatec Slatec/;
+
+
+# SSVDC = singular value decomposition for floats.
+# Writing these like this is probably too much work :(
+
+addhdr('
+#include "f2c.h"
+#include "SlatecProtos.h"
+');
+
+defpdl(
+	'svdc',
+	'float x(n,p,...); float s(p,...); float e(p,...); float u(n,p,...);
+	 float v(p,p,...); float work(n); int job(one); int info(one);
+	 TYPES:FD
+		',
+	'',
+	'
+	 $TFD(ssvdc_,dsvdc_)
+	  ($P(x),&n_size,&n_size,&p_size,$P(s),$P(e),$P(u), &n_size, $P(v), &p_size, $P(work), (int *)$P(job), (int *)$P(info));
+	'
+);
+
+done();
