@@ -14,7 +14,7 @@
 #	OBJECT => q[Slatec$(OBJ_EXT) slatec/fdump.o slatec/i1mach.o slatec/j4save.o slatec/lsame.o slatec/pythag.o slatec/r1mach.o slatec/rs.o slatec/sasum.o slatec/saxpy.o slatec/sdot.o slatec/sgemm.o slatec/sgemv.o slatec/snrm2.o slatec/spoco.o slatec/spodi.o slatec/spofa.o slatec/srot.o slatec/srotg.o slatec/ssbmv.o slatec/sscal.o slatec/ssvdc.o slatec/sswap.o slatec/tql2.o slatec/tqlrat.o slatec/tred1.o slatec/tred2.o slatec/xerbla.o slatec/xercnt.o slatec/xerhlt.o slatec/xermsg.o slatec/xerprn.o slatec/xersve.o slatec/xgetua.o]
 #	PM => { Slatec.pm=>q[$(INST_LIBDIR)/Slatec.pm] }
 #	TYPEMAPS => [q[/usr/lib/perl5/site_perl/PDL/Core/typemap.pdl]]
-#	VERSION => q[0.001]
+#	VERSION => q[0.002]
 #	clean => { FILES=>q[Slatec.xs] }
 
 # --- MakeMaker post_initialize section:
@@ -47,9 +47,9 @@ AR_STATIC_ARGS = cr
 NAME = PDL::Slatec
 DISTNAME = PDL-Slatec
 NAME_SYM = PDL_Slatec
-VERSION = 0.001
-VERSION_SYM = 0_001
-XS_VERSION = 0.001
+VERSION = 0.002
+VERSION_SYM = 0_002
+XS_VERSION = 0.002
 INST_BIN = ./blib/bin
 INST_EXE = ./blib/script
 INST_LIB = ./blib/lib
@@ -98,7 +98,7 @@ LDFROM = $(OBJECT)
 LINKTYPE = dynamic
 
 # Handy lists of source code files:
-XS_FILES= 
+XS_FILES= Slatec.xs
 C_FILES = Slatec.c
 O_FILES = Slatec.o
 H_FILES = SlatecProtos.h
@@ -452,7 +452,7 @@ manifypods :
 # the Makefile here so a later make realclean still has a makefile to use.
 
 clean ::
-	-rm -rf Slatec.xs ./blib $(MAKE_APERL_FILE) $(INST_ARCHAUTODIR)/extralibs.all perlmain.c mon.out core so_locations pm_to_blib *~ */*~ */*/*~ *$(OBJ_EXT) *$(LIB_EXT) perl.exe $(BOOTSTRAP) $(BASEEXT).bso $(BASEEXT).def $(BASEEXT).exp
+	-rm -rf Slatec.c Slatec.xs ./blib $(MAKE_APERL_FILE) $(INST_ARCHAUTODIR)/extralibs.all perlmain.c mon.out core so_locations pm_to_blib *~ */*~ */*/*~ *$(OBJ_EXT) *$(LIB_EXT) perl.exe $(BOOTSTRAP) $(BASEEXT).bso $(BASEEXT).def $(BASEEXT).exp
 	-mv Makefile Makefile.old 2>/dev/null
 
 
@@ -642,6 +642,8 @@ $(PERL_INC)/embed.h        $(PERL_INC)/perl.h				     \
 $(PERL_INC)/form.h         $(PERL_INC)/perly.h
 
 $(OBJECT) : $(PERL_HDRS)
+
+Slatec.c : $(XSUBPPDEPS)
 
 
 # --- MakeMaker makefile section:

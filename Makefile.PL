@@ -16,7 +16,7 @@ use PDL::Core::Dev;            # Pick up development utilities
 WriteMakefile(
  'NAME'  	=> 'PDL::Slatec',
 # 'VERSION_FROM'	=> 'PP.pm',
- 'VERSION'	=> '0.001',
+ 'VERSION'	=> '0.002',
  'TYPEMAPS'     => [PDL_TYPEMAP], 
  'OBJECT'       => (join " ", 'Slatec$(OBJ_EXT)',map {"slatec/$_.o"}@slatecfiles),           
  PM 	=> {'Slatec.pm' => '$(INST_LIBDIR)/Slatec.pm'},

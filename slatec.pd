@@ -18,15 +18,37 @@ addhdr('
 
 defpdl(
 	'svdc',
-	'float x(n,p,...); float s(p,...); float e(p,...); float u(n,p,...);
-	 float v(p,p,...); float work(n); int job(one); int info(one);
+	'x(n,p,...); s(p,...); e(p,...); u(n,p,...);
+	 v(p,p,...); work(n); int job(one); int info(one,...);
 	 TYPES:FD
 		',
 	'',
 	'
 	 $TFD(ssvdc_,dsvdc_)
-	  ($P(x),&n_size,&n_size,&p_size,$P(s),$P(e),$P(u), &n_size, $P(v), &p_size, $P(work), (int *)$P(job), (int *)$P(info));
+	  ($P(x),&n_size,&n_size,&p_size,$P(s),$P(e),$P(u), &n_size, $P(v), &p_size, $P(work), $P(job), $P(info));
 	'
+);
+
+defpdl(
+	'poco',
+	'a(n,n,...); rcond(one,...); [o]z(n); int info(one,...); TYPES:FD',
+	'',
+	'$TFD(spoco_,dpoco_)
+	 ($P(a),&n_size,&n_size,$P(rcond),$P(z),$P(info));'
+);
+
+defpdl(
+	'podi',
+	'a(n,n,...); int job(one); det(two); TYPES:FD',
+	'',
+	'$TFD(spodi_,dpodi_)
+	 ($P(a),&n_size,&n_size,$P(det),$P(job));
+/* Complete the inverse */
+	 loop(n0,n1) %{
+	 	if(n0<=n1) continue;
+		$a(n0=>n0,n1=>n1) = $a(n0=>n1,n1=>n0);
+	 %}
+	 '
 );
 
 done();
